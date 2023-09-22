@@ -30,7 +30,7 @@ router.post("/print", async (req, res, next) => {
     await ptp.print(path, options)
     fs.unlinkSync(path)
 
-    res.json("File Printing!")
+    res.json(`Printing ${file.originalname}...`)
   }
 
   catch (error) {

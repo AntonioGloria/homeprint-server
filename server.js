@@ -4,5 +4,5 @@ const app = require("./app");
 const PORT = process.env.PORT || 5003;
 
 app.listen(PORT, () => {
-  console.log(`Server listening on http://192.168.1.79:${PORT}`);
+  console.log(`Server listening on http://localhost:${PORT}`);
 });
