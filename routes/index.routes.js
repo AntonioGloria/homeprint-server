@@ -20,12 +20,16 @@ router.post("/upload", upload.single("file"), async (req, res, next) => {
 })
 
 router.post("/print", async (req, res, next) => {
+  const dateNow = new Date(Date.now())
+  const printDate = dateNow.toDateString()
+  const printTime = dateNow.toLocaleTimeString()
+
   try {
     const { file, options } = req.body
     const { path } = file
 
-    console.log("INCOMING PRINT JOB")
-    console.table({"filename": file.originalname, ...options});
+    console.log(`INCOMING PRINT JOB - ${printDate} ${printTime}`)
+    console.table({ "filename": file.originalname, ...options });
     await ptp.print(path, { ...options, printer:"EPSON L4150 Series" })
     fs.unlinkSync(path)
 
