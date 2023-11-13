@@ -30,7 +30,7 @@ router.post("/print", async (req, res, next) => {
 
     console.log(`INCOMING PRINT JOB - ${printDate} ${printTime}`)
     console.table({ "filename": file.originalname, ...options });
-    await ptp.print(path, { ...options, printer:"EPSON L4150 Series" })
+    await ptp.print(path, { ...options, printer: process.env.PRINTER })
     fs.unlinkSync(path)
 
     res.json(`Printing ${file.originalname}...`)
