@@ -17,7 +17,8 @@
     "mongoose": "^7.5.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "pdf-to-printer": "^5.6.0"
+    "pdf-to-printer": "^5.6.0",
+    "pdfjs-dist": "^4.0.189"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

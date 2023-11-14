@@ -3,6 +3,7 @@ const router = express.Router()
 const multer = require("multer")
 const upload = multer({ dest: 'print-files' })
 const ptp = require("pdf-to-printer")
+const pdfjsLib = import('pdfjs-dist');
 const fs = require("fs")
 
 router.get("/", (req, res, next) => {
@@ -11,7 +12,12 @@ router.get("/", (req, res, next) => {
 
 router.post("/upload", upload.single("file"), async (req, res, next) => {
   try {
-    res.json(req.file)
+    const { file } = req
+    const docLoad = (await pdfjsLib).getDocument(file.path)
+    const doc = await docLoad.promise
+    const filePages = doc.numPages
+
+    res.json({ ...file, filePages })
   }
 
   catch (error) {
