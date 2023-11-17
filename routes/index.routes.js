@@ -31,11 +31,15 @@ router.post("/print", async (req, res, next) => {
   const printTime = dateNow.toLocaleTimeString()
 
   try {
-    const { file, options } = req.body
+    const { file, options, totalPages } = req.body
     const { path } = file
 
     console.log(`INCOMING PRINT JOB - ${printDate} ${printTime}`)
-    console.table({ "filename": file.originalname, ...options });
+    console.table({
+      "filename": file.originalname,
+      ...options,
+      totalPages
+    });
     await ptp.print(path, { ...options, printer: process.env.PRINTER })
     fs.unlinkSync(path)
 
